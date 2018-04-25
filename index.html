@@ -1,12 +1,89 @@
-<!DOCTYPE html> <html lang="en">
+
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>webpack demo</title> </head>
-<body> <!-- 我们给最终编译出的js叫做bundle.js-->
-<!--<script src="./dist/js/bundle.js"></script>-->
-<div>hfjahjkfajsh</div>
-<div id="content"></div>
+    <title>Utils</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body>
+<style>
+    html, body{
+        margin: 0;
+        padding: 0;
+        height: 667px;
+    }
+    body{
+        overflow:hidden;
+
+    }
+    #main {
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+        height: 667px;
+        overflow-y: scroll;
+    }
+    #content {
+        background:#ccc;
+    }
+    .item{
+        height: 100px;
+        margin-bottom: 9px;
+        text-align: center;
+        line-height: 100px;
+        border-bottom: 1px solid red;
+    }
+
+    #ptr-instructions,#up-instructions {
+        width: 100%;
+        background-color: #ccc;
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    #ptr-instructions {
+        height: 0;
+
+    }
+    #up-instructions {
+        line-height: 60px;
+        height: 60px;
+        visibility:hidden;
+        background:#fff;
+        color: gray;
+    }
+
+
+</style>
+<script type="text/javascript" src="src/js/pulltorefresh.js"></script>
+<div id = "ptr-instructions">
+    <!--your loading icon here-->
+    <span class= "ptr-instructions-text"></span>
+</div>
+<div id = "main">
+
+    <div id="content">
+        <div class = "item">1</div>
+        <div class = "item">2</div>
+        <div class = "item">3</div>
+        <div class = "item">4</div>
+        <div class = "item">5</div>
+        <div class = "item">6</div>
+        <div class = "item">7</div>
+        <div class = "item">8</div>
+        <div class = "item">9</div>
+        <div class = "item">10</div>
+        <div class = "item">11</div>
+        <div class = "item">12</div>
+        <div class = "item">13</div>
+    </div>
+    <div id = "up-instructions">
+        <!--your loading icon here-->
+        <span class= "up-instructions-text"></span>
+    </div>
+</div>
+
 </body>
 </html>
