@@ -15,6 +15,7 @@
     let _element = '';
     let upOrDown = ''; //上拉还是下拉
     let scrollTop = '';
+    let cfg = ''
     let pullToRefresh = {
         init: function(cfg){
             Object.keys(_defaults).forEach((key) => {
@@ -46,6 +47,7 @@
                 _element.style['transition'] = 'transform 0s';
                 // 'pull to refresh'
                 _ptrTextEle.innerText = cfg.instructionsPullToRefresh;
+                _upTextEle.innerText = cfg.instructionsPullToRefresh;
             });
 
             _element.addEventListener('touchmove', function(event) {
@@ -61,32 +63,39 @@
                     pullElement(_element, -(_pullLengh), cfg, 'up');
                 }
             });
+
             _element.addEventListener('touchend', function() {
                 if(upOrDown === 'down') {
                     if(_pullLengh > cfg.threshold){
-                        // 'refreshing'
-                        _ptrTextEle.innerText = cfg.instructionsRefreshing;
                         cfg.onPull();
-                        _pullLengh = 0;
                     }
-                    _element.style['transition'] = 'transform 0.6s ease';
-                    _element.style['transform'] = 'translate(0, 0px)';
                 } else if(upOrDown === 'up'){
                     if(-(_pullLengh) > cfg.thresholdUp){
-                        // 'refreshing'
-                        _upTextEle.innerText = cfg.instructionsRefreshing;
                         cfg.onPullUp();
-                        _pullLengh = 0;
-                        _upEle.style.visibility = 'hidden';
                     }
-                    _element.style['transition'] = 'transform 0.6s ease';
-                    _element.style['transform'] = 'translate(0, 0px)';
                 }
-                upOrDown = '';
             });
+        },
+
+        //请求后，复位上拉或者下拉组件
+        restore: function(){
+            if(upOrDown=== 'up') {
+                // 'refreshing'
+                _ptrTextEle.innerText = cfg.instructionsRefreshing;
+                _ptrEle.style['height'] = 0;
+            } else {
+                // 'refreshing'
+                _upTextEle.innerText = cfg.instructionsRefreshing;
+                _upEle.style.visibility = 'hidden';
+            }
+            _pullLengh = 0;
+            _element.style['transition'] = 'transform 0.6s ease';
+            _element.style['transform'] = 'translate(0, 0px)';
+            upOrDown = '';
         }
     };
 
+    //上拉或者下拉文案提示
     let pullElement = function(element, length, cfg, upOrDown){
         //下拉
         if(upOrDown === 'down') {

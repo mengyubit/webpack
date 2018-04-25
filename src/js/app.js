@@ -1,7 +1,7 @@
 import '../lib/zepto';
 import './pulltorefresh.js';
-console.log(pullToRefresh);
 
+// 浏览器中下拉会露底
 function stopDrop() {
     var lastY;//最后一次y坐标点
     $(document.body).on('touchstart', function(event) {
@@ -46,6 +46,7 @@ pullToRefresh.init({
         newItem.appendChild(textnode);
         newItem.className='item';
         document.getElementById('content').insertBefore(newItem,contentCt.childNodes[0]);
+        pullToRefresh.restore();
     },
 
     onPullUp: function(){
@@ -55,5 +56,6 @@ pullToRefresh.init({
         newItem.appendChild(textnode);
         newItem.className='item';
         document.getElementById('content').appendChild(newItem,contentCt.childNodes[0]);
+        pullToRefresh.restore();
     }
 });
